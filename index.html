@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScubaWing - Mokarran PRO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #2c3e2d;
+    --accent: #7a9e7e;
+    --accent2: #5b8a5f;
+    --warm: #c4a882;
+    --warm2: #a68b6b;
+    --sand: #e8ddd3;
+    --light: #f5f0eb;
+    --cream: #faf7f4;
+    --white: #ffffff;
+    --gray: #8a8177;
+    --dark: #1e2a1f;
+    --sage: #b5c4b1;
+    --terracotta: #c4917b;
+    --dusty: #d4b5a0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%; background: rgba(250,247,244,0.92);
+    backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s;
+  }
+  nav.scrolled { padding: 12px 5%; box-shadow: 0 4px 30px rgba(44,62,45,0.06); }
+  .logo { font-family: 'Montserrat', sans-serif; font-size: 1.95rem; font-weight: 700; letter-spacing: 3px; color: var(--primary); text-decoration: none; position: relative; }
+  .logo-sup { font-size: 0.35em; font-weight: 600; letter-spacing: 1px; vertical-align: super; margin-left: 2px; opacity: 0.6; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--primary); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent2); }
+  .nav-cta {
+    background: var(--primary); color: var(--cream) !important; padding: 10px 24px;
+    border-radius: 50px; font-weight: 600 !important; transition: all 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--primary); transition: all 0.3s; border-radius: 2px; }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(165deg, var(--primary) 0%, #3d5a3f 35%, #5b8a5f 65%, var(--sage) 100%);
+    position: relative; overflow: hidden; padding: 120px 5% 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(196,168,130,0.15) 0%, transparent 70%);
+    border-radius: 50%; animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(181,196,177,0.12) 0%, transparent 70%);
+    border-radius: 50%; animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 1200px; width: 100%; display: flex; align-items: center; gap: 60px; }
+  .hero-text { flex: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 8px 20px;
+    font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 24px; backdrop-filter: blur(10px);
+  }
+  .hero-badge .dot { width: 8px; height: 8px; background: var(--sage); border-radius: 50%; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; color: white; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+  .hero h1 span { background: linear-gradient(135deg, var(--sand), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 1.15rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 500px; margin-bottom: 36px; }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--warm); color: var(--dark); padding: 16px 36px; border-radius: 50px;
+    font-weight: 700; font-size: 1rem; text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--warm2); color: white; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,168,130,0.3); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.08); color: white; padding: 16px 36px; border-radius: 50px;
+    font-weight: 600; font-size: 1rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s; backdrop-filter: blur(10px); cursor: pointer;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+
+  .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+  .hero-product { width: 100%; max-width: 480px; position: relative; }
+  .product-glow {
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,168,130,0.2) 0%, transparent 70%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.1); } }
+
+  .product-img {
+    position: relative; z-index: 2; width: 200%; max-width: 960px;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
+    transform-origin: center center;
+    margin-left: -50%;
+    transition: transform 0.6s ease-out;
+  }
+
+  .specs { padding: 100px 5%; background: var(--cream); }
+  .section-header { text-align: center; margin-bottom: 40px; }
+  .section-label {
+    display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--accent2);
+    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px;
+  }
+  .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1px; color: var(--primary); }
+  .section-header p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 16px auto 0; line-height: 1.7; }
+
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .spec-card {
+    background: white; border-radius: 20px; padding: 36px 28px; text-align: center;
+    border: 1px solid rgba(44,62,45,0.06); transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .spec-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--warm)); transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .spec-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(44,62,45,0.07); }
+  .spec-card:hover::before { transform: scaleX(1); }
+  .spec-icon {
+    width: 64px; height: 64px; background: var(--light); border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+    font-size: 1.6rem;
+  }
+  .spec-value { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
+  .spec-label { font-size: 0.85rem; color: var(--gray); font-weight: 500; }
+
+  .features {
+    padding: 60px 5%; position: relative; overflow: hidden;
+    background: var(--light);
+  }
+  .features::before {
+    content: ''; position: absolute; top: 0; left: 15%; right: -15%; bottom: 0;
+    background: url('https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/render1_2.jpg') right center / cover no-repeat;
+    opacity: 0.8;
+  }
+  .features::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to right, var(--light) 0%, var(--light) 30%, rgba(245,240,235,0.4) 65%, rgba(245,240,235,0) 100%);
+  }
+  .features .section-header, .features .features-grid { position: relative; z-index: 2; }
+
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .feature-card {
+    padding: 24px 20px; border-radius: 16px; background: rgba(255,255,255,0.85);
+    transition: all 0.4s; position: relative; overflow: hidden;
+    border: 1px solid rgba(44,62,45,0.04); backdrop-filter: blur(10px);
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(44,62,45,0.08); }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--sage), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-size: 1.1rem; color: white;
+  }
+  .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+  .about {
+    padding: 100px 5%;
+    background: linear-gradient(165deg, var(--primary) 0%, #3d5a3f 100%);
+    color: white;
+  }
+  .about-content { max-width: 1100px; margin: 0 auto; display: flex; gap: 60px; align-items: center; }
+  .about-text { flex: 1; }
+  .about-text .section-label { color: var(--sage); }
+  .about-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; }
+  .about-text p { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px; }
+  .about-visual { flex: 1; display: flex; justify-content: center; }
+  .about-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px; padding: 48px 40px; backdrop-filter: blur(20px); width: 100%; max-width: 420px;
+  }
+  .about-stat { margin-bottom: 28px; }
+  .about-stat:last-child { margin-bottom: 0; }
+  .about-stat-value { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--sand), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .about-stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  .preorder { padding: 100px 5%; background: var(--cream); }
+  .preorder-box {
+    max-width: 700px; margin: 0 auto; text-align: center;
+    background: linear-gradient(135deg, var(--light), var(--sand));
+    border-radius: 28px; padding: 60px 40px 40px; position: relative; overflow: hidden;
+  }
+  .price-row {
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid rgba(44,62,45,0.1);
+  }
+  .price-new { font-size: 2.4rem; font-weight: 900; color: var(--primary); }
+  .price-old { font-size: 1.2rem; color: var(--gray); text-decoration: line-through; }
+  .price-badge { background: var(--accent2); color: white; padding: 5px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; }
+  .price-note { font-size: 0.85rem; color: var(--gray); margin-top: 6px; margin-bottom: 24px; }
+
+  footer {
+    padding: 48px 5%; background: var(--dark); color: rgba(255,255,255,0.35);
+    text-align: center; font-size: 0.85rem;
+  }
+  footer .footer-logo { font-family: 'Montserrat', sans-serif; font-size: 1.69rem; font-weight: 700; color: white; margin-bottom: 16px; letter-spacing: 3px; }
+  footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+  footer .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; font-size: 0.85rem; }
+  footer .footer-links a:hover { color: var(--sage); }
+
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(250,247,244,0.98); flex-direction: column; align-items: center;
+      justify-content: center; gap: 28px; backdrop-filter: blur(20px);
+    }
+    .nav-links.open { display: flex; z-index: 999; }
+    .nav-links a { font-size: 1.2rem; }
+    .hamburger { display: flex; z-index: 1001; }
+    .hero-content { flex-direction: column; text-align: center; }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero-buttons { justify-content: center; }
+    .hero-visual { order: -1; }
+    .specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid { grid-template-columns: 1fr; }
+    .about-content { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 500px) {
+    .specs-grid { grid-template-columns: 1fr; }
+    .hero { padding: 100px 5% 60px; }
+    .preorder-box { padding: 40px 24px 30px; }
+  }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="logo">SCUBAWING<sup class="logo-sup">MKRN</sup></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#specs" onclick="closeMenu()">Specs</a>
+    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#preorder" class="nav-cta" onclick="closeMenu()">Pre-Order</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="dot"></span> Pre-Orders Now Open</div>
+      <h1>Mokarran<br><span>PRO</span></h1>
+      <p>The next generation underwater dive propulsion vehicle. Engineered for performance, built for adventure. Explore the deep like never before.</p>
+      <div class="hero-buttons">
+        <a href="#preorder" class="btn-primary">Pre-Order Now &#8594;</a>
+        <a href="#specs" class="btn-secondary">View Specs</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-product">
+        <div class="product-glow"></div>
+        <img class="product-img" src="https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/sestav_v8_2022-Aug-02_09-22-47AM-000_CustomizedView17041662227.png" alt="Mokarran PRO">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="specs" id="specs">
+  <div class="section-header fade-up">
+    <div class="section-label">Performance</div>
+    <h2>Built to Perform</h2>
+    <p>Every detail of the Mokarran PRO is engineered for maximum underwater performance and reliability.</p>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-card fade-up">
+      <div class="spec-icon">&#9889;</div>
+      <div class="spec-value">35 lbs</div>
+      <div class="spec-label">of motor thrust</div>
+    </div>
+    <div class="spec-card fade-up">
+      <div class="spec-icon">&#128267;</div>
+      <div class="spec-value">3 hrs</div>
+      <div class="spec-label">battery life</div>
+    </div>
+    <div class="spec-card fade-up">
+      <div class="spec-icon">&#127754;</div>
+      <div class="spec-value">8 mph</div>
+      <div class="spec-label">top speed underwater</div>
+    </div>
+    <div class="spec-card fade-up">
+      <div class="spec-icon">&#128907;</div>
+      <div class="spec-value">40 m</div>
+      <div class="spec-label">depth rated</div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-header fade-up">
+    <div class="section-label">Features</div>
+    <h2>Why Mokarran PRO</h2>
+    <p>Designed by divers, for divers. Every feature serves a purpose beneath the surface.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#9878;</div>
+      <h3>Precision Control</h3>
+      <p>Variable speed trigger with intuitive ergonomic grip gives you total command of your underwater movement.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#128171;</div>
+      <h3>Hydrodynamic Design</h3>
+      <p>Wing-inspired body reduces drag and provides effortless gliding through the water at any depth.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#128274;</div>
+      <h3>Quick-Swap Battery</h3>
+      <p>Modular battery system allows fast swaps between dives with no tools required.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#127919;</div>
+      <h3>Ultra Quiet Motor</h3>
+      <p>Brushless motor runs whisper-quiet so you can approach marine life without disturbance.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#128161;</div>
+      <h3>LED Depth Display</h3>
+      <p>Integrated display shows speed, battery level, and depth at a glance on every dive.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <div class="feature-icon">&#128736;</div>
+      <h3>Marine-Grade Build</h3>
+      <p>Anodized aluminum and reinforced polymer construction withstands the toughest conditions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-content">
+    <div class="about-text fade-up">
+      <div class="section-label">About ScubaWing</div>
+      <h2>Redefining Underwater Exploration</h2>
+      <p>Named after the great hammerhead shark (Sphyrna mokarran), the Mokarran PRO embodies the power and grace of one of the ocean's most impressive predators.</p>
+      <p>At ScubaWing, we're building the future of personal underwater propulsion — combining cutting-edge engineering with a deep respect for the marine environment.</p>
+    </div>
+    <div class="about-visual fade-up">
+      <div class="about-card">
+        <div class="about-stat">
+          <div class="about-stat-value">100%</div>
+          <div class="about-stat-label">Electric & Zero Emissions</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-value">2026</div>
+          <div class="about-stat-label">Expected First Deliveries</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-value">&lt; 12 kg</div>
+          <div class="about-stat-label">Lightweight & Travel-Ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preorder" id="preorder">
+  <div class="preorder-box fade-up">
+    <div class="section-label">Limited Early Bird</div>
+    <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:16px;color:var(--primary);">Reserve Your Mokarran PRO</h2>
+    <p style="color:var(--gray);font-size:1.05rem;line-height:1.7;max-width:500px;margin:0 auto;">We're currently accepting pre-orders via email. Be among the first to own the future of underwater propulsion.</p>
+    <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(44,62,45,0.1);text-align:left;">
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Early Bird Bundle</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
+            <span style="color:var(--accent2);">&#10003;</span> 1x Mokarran PRO
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
+            <span style="color:var(--accent2);">&#10003;</span> 1x Fast Charger
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
+            <span style="color:var(--accent2);">&#10003;</span> 1x Free MKRN App Connectivity
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:200px;text-align:center;">
+        <div class="price-row" style="margin-top:0;padding-top:0;border-top:none;">
+          <span class="price-new">€1,950</span>
+          <span class="price-old">€3,900</span>
+          <span class="price-badge">-50%</span>
+        </div>
+        <p class="price-note">Early bird pre-order price</p>
+        <a href="mailto:sales@scubawing.com?subject=Mokarran%20PRO%20Pre-Order" class="btn-primary" style="font-size:1.1rem;padding:18px 40px;">Pre-order now! &#8594;</a>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--gray);margin-top:16px;">Send us an email with subject "Mokarran PRO Pre-Order" to reserve yours.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SCUBAWING<sup class="logo-sup" style="color:rgba(255,255,255,0.6)">MKRN</sup></div>
+  <div class="footer-links">
+    <a href="#specs">Specs</a>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#preorder">Pre-Order</a>
+  </div>
+  <p>&copy; 2026 ScubaWing. All rights reserved. www.scubawing.com</p>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    const img = document.querySelector('.product-img');
+    if (img) {
+      const hero = document.querySelector('.hero');
+      const heroBottom = hero.offsetHeight;
+      if (window.scrollY > heroBottom) {
+        img.style.transform = 'rotate(0deg)';
+      } else {
+        const rot = -(window.scrollY * 0.015);
+        img.style.transform = 'rotate(' + rot + 'deg)';
+      }
+    }
+  });
+
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
