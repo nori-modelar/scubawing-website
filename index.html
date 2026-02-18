@@ -184,6 +184,7 @@
     .hero{padding:100px 5% 60px}
     .preorder-box{padding:40px 24px 30px}
   }
+  @keyframes speedBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
   .fade-up{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
   .fade-up.visible{opacity:1;transform:translateY(0)}
 </style>
@@ -239,9 +240,9 @@
     <p>Every detail of the Mokarran is engineered for maximum underwater performance and fun. Come and fly with us underwater!</p>
   </div>
   <div class="specs-grid">
-    <div class="spec-card fade-up"><div class="spec-icon">&#9889;</div><div class="spec-value">60+ kg</div><div class="spec-label">of motor thrust</div></div>
+    <div class="spec-card fade-up"><div class="spec-icon">&#9889;</div><div class="spec-value"><span id="thrustVal">30</span>+ kg</div><div class="spec-label">of motor thrust</div></div>
     <div class="spec-card fade-up"><div class="spec-icon">&#128267;</div><div class="spec-value">Up to 1h</div><div class="spec-label">of battery life</div></div>
-    <div class="spec-card fade-up"><div class="spec-icon">&#127754;</div><div class="spec-value">15 km/h</div><div class="spec-label">top speed underwater</div></div>
+    <div class="spec-card fade-up"><div class="spec-icon">&#127754;</div><div class="spec-value"><span id="speedVal" style="display:inline-block;animation:speedBreathe 3s ease-in-out infinite;">15</span> km/h</div><div class="spec-label">top speed underwater</div></div>
     <div class="spec-card fade-up"><div class="spec-icon">🎯</div><div class="spec-value">Up to 40m</div><div class="spec-label">depth rated</div></div>
   </div>
 </section>
@@ -455,6 +456,28 @@
   });
   function swapCards(){document.getElementById('cardsWrapper').classList.toggle('swapped')}
   function toggleTip(el){document.querySelectorAll('.timeline-point').forEach(p=>{if(p!==el)p.classList.remove('show-tip')});el.classList.toggle('show-tip')}
+  // Thrust counter animation
+  let thrustAnimated=false;
+  const thrustObserver=new IntersectionObserver(e=>{
+    e.forEach(el=>{
+      if(el.isIntersecting&&!thrustAnimated){
+        thrustAnimated=true;
+        const el2=document.getElementById('thrustVal');
+        const start=30,end=60,duration=2300;
+        const startTime=performance.now();
+        function update(now){
+          const p=Math.min((now-startTime)/duration,1);
+          // ease out expo for accelerating feel
+          const eased=p===1?1:1-Math.pow(2,-10*p);
+          el2.textContent=Math.round(start+(end-start)*eased);
+          if(p<1)requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+    });
+  },{threshold:.5});
+  thrustObserver.observe(document.getElementById('thrustVal'));
+
   const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.15});
   document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 </script>
