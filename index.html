@@ -8,394 +8,155 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;700&display=swap');
   @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
   @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --primary: #2c3e2d;
-    --accent: #7a9e7e;
-    --accent2: #5b8a5f;
-    --warm: #c4a882;
-    --warm2: #a68b6b;
-    --sand: #e8ddd3;
-    --light: #f5f0eb;
-    --cream: #faf7f4;
-    --white: #ffffff;
-    --gray: #8a8177;
-    --dark: #1e2a1f;
-    --sage: #b5c4b1;
-    --terracotta: #c4917b;
-    --dusty: #d4b5a0;
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--primary:#2c3e2d;--accent:#7a9e7e;--accent2:#5b8a5f;--warm:#c4a882;--warm2:#a68b6b;--sand:#e8ddd3;--light:#f5f0eb;--cream:#faf7f4;--white:#fff;--gray:#8a8177;--dark:#1e2a1f;--sage:#b5c4b1;--terracotta:#c4917b;--dusty:#d4b5a0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat','Inter',sans-serif;color:var(--primary);background:var(--cream);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(250,247,244,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.04);transition:all .3s}
+  nav.scrolled{padding:12px 5%;box-shadow:0 4px 30px rgba(44,62,45,0.06)}
+  .logo{font-family:'Montserrat',sans-serif;font-size:1.95rem;font-weight:700;letter-spacing:3px;color:var(--primary);text-decoration:none;position:relative}
+  .logo-sup{font-size:.35em;font-weight:600;letter-spacing:1px;vertical-align:super;margin-left:2px;opacity:.6}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{text-decoration:none;color:var(--primary);font-weight:500;font-size:.9rem;transition:color .2s}
+  .nav-links a:hover{color:var(--accent2)}
+  .nav-cta{background:var(--primary);color:var(--cream)!important;padding:10px 24px;border-radius:50px;font-weight:600!important;transition:all .3s!important}
+  .nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+  .hamburger span{width:24px;height:2px;background:var(--primary);transition:all .3s;border-radius:2px}
+  .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(165deg,var(--primary) 0%,#3d5a3f 35%,#5b8a5f 65%,var(--sage) 100%);position:relative;overflow:hidden;padding:120px 5% 80px}
+  .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(196,168,130,0.15) 0%,transparent 70%);border-radius:50%;animation:pulse 8s ease-in-out infinite}
+  .hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(181,196,177,0.12) 0%,transparent 70%);border-radius:50%;animation:pulse 10s ease-in-out infinite reverse}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.2);opacity:1}}
+  .hero-content{position:relative;z-index:2;max-width:1200px;width:100%;display:flex;align-items:center;gap:60px}
+  .hero-text{flex:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:8px 20px;font-size:.85rem;color:rgba(255,255,255,0.85);margin-bottom:24px;backdrop-filter:blur(10px)}
+  .hero-badge .dot{width:8px;height:8px;background:var(--sage);border-radius:50%;animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
+  .hero h1 span{background:linear-gradient(135deg,var(--sand),var(--warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{font-size:1.15rem;color:rgba(255,255,255,0.7);line-height:1.7;max-width:500px;margin-bottom:36px}
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{background:var(--warm);color:var(--dark);padding:16px 36px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary:hover{background:var(--warm2);color:#fff;transform:translateY(-2px);box-shadow:0 12px 40px rgba(196,168,130,0.3)}
+  .btn-secondary{background:rgba(255,255,255,0.08);color:#fff;padding:16px 36px;border-radius:50px;font-weight:600;font-size:1rem;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:all .3s;backdrop-filter:blur(10px);cursor:pointer}
+  .btn-secondary:hover{background:rgba(255,255,255,0.15)}
+  .hero-visual{flex:1;display:flex;justify-content:center;align-items:center;position:relative}
+  .hero-product{width:100%;max-width:480px;position:relative}
+  .product-glow{width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(196,168,130,0.2) 0%,transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glowPulse 4s ease-in-out infinite}
+  @keyframes glowPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+  .product-img{position:relative;z-index:2;width:200%;max-width:960px;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.3));transform-origin:center center;margin-left:-50%;transition:transform .6s ease-out}
+  .specs{padding:100px 5%;background:var(--cream)}
+  .specs .section-header,.specs .specs-grid{position:relative;z-index:2}
+  .section-header{text-align:center;margin-bottom:40px}
+  .section-label{display:inline-block;font-size:.8rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px}
+  .section-header h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1px;color:var(--primary)}
+  .section-header p{color:var(--gray);font-size:1.1rem;max-width:600px;margin:16px auto 0;line-height:1.7}
+  .specs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1100px;margin:0 auto}
+  .spec-card{background:#fff;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid rgba(44,62,45,0.06);transition:all .4s;position:relative;overflow:hidden}
+  .spec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--warm));transform:scaleX(0);transition:transform .4s}
+  .spec-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(44,62,45,0.07)}
+  .spec-card:hover::before{transform:scaleX(1)}
+  .spec-icon{width:64px;height:64px;background:var(--light);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem}
+  .spec-value{font-size:1.8rem;font-weight:900;color:var(--primary);margin-bottom:4px}
+  .spec-label{font-size:.85rem;color:var(--gray);font-weight:500}
+  .features{padding:60px 5%;position:relative;overflow:hidden;background:var(--light)}
+  .features::before{content:'';position:absolute;top:0;left:15%;right:-15%;bottom:0;background:url('https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/render1_2.jpg') right center/cover no-repeat;opacity:.8}
+  .features::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to right,var(--light) 0%,var(--light) 30%,rgba(245,240,235,0.4) 65%,rgba(245,240,235,0) 100%)}
+  .features .section-header,.features .features-grid{position:relative;z-index:2}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+  .feature-card{padding:24px 20px;border-radius:16px;background:rgba(255,255,255,0.85);transition:all .4s;position:relative;overflow:hidden;border:1px solid rgba(44,62,45,0.04);backdrop-filter:blur(10px)}
+  .feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(44,62,45,0.08)}
+  .feature-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--sage),var(--accent));display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.1rem;color:#fff}
+  .feature-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+  .feature-card p{font-size:.85rem;color:var(--gray);line-height:1.6}
+  .app-section{padding:100px 5%;background:var(--cream);overflow:hidden}
+  .app-content{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px}
+  .app-img-wrap{flex:1;display:flex;justify-content:center}
+  .app-img{width:100%;max-width:476px;filter:drop-shadow(0 20px 50px rgba(0,0,0,0.15));animation:appFloat 5s ease-in-out infinite;cursor:pointer;transition:filter .5s ease}
+  .app-img:hover{filter:drop-shadow(0 0 20px rgba(100,200,255,0.8)) drop-shadow(0 0 40px rgba(100,200,255,0.5)) drop-shadow(0 0 60px rgba(100,200,255,0.3))}
+  @keyframes appFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .app-text{flex:1}
+  .app-text h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-1px;margin-bottom:20px;color:var(--primary)}
+  .app-text p{color:var(--gray);font-size:1.05rem;line-height:1.8;margin-bottom:16px}
+  .app-features{display:flex;flex-direction:column;gap:14px;margin:24px 0 32px}
+  .app-feature-item{display:flex;align-items:center;gap:12px;font-size:.95rem;color:var(--primary);font-weight:500}
+  .app-feature-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;flex-shrink:0}
+  .about{padding:100px 5%;background:linear-gradient(165deg,var(--primary) 0%,#3d5a3f 100%);color:#fff}
+  .about-content{max-width:1100px;margin:0 auto;display:flex;gap:60px;align-items:center}
+  .about-text{flex:1}
+  .about-text .section-label{color:var(--sage)}
+  .about-text h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-1px;margin-bottom:20px}
+  .about-text p{color:rgba(255,255,255,0.65);font-size:1.05rem;line-height:1.8;margin-bottom:16px}
+  .about-visual{flex:1;display:flex;justify-content:center}
+  .about-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:48px 40px;backdrop-filter:blur(20px);width:100%;max-width:420px}
+  .about-stat{margin-bottom:28px}
+  .about-stat:last-child{margin-bottom:0}
+  .about-stat-value{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--sand),var(--warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .about-stat-label{font-size:.9rem;color:rgba(255,255,255,0.45);margin-top:4px}
+  .about-timeline{max-width:1100px;margin:60px auto 0;position:relative;padding:0 20px}
+  .timeline-line{position:relative;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 10px}
+  .timeline-fill{position:absolute;top:0;left:0;height:100%;width:100%;background:linear-gradient(to right,var(--sage),var(--warm));border-radius:2px}
+  .timeline-arrow{position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:14px solid var(--warm)}
+  .timeline-dot-start{position:absolute;left:-6px;top:50%;transform:translateY(-50%);width:14px;height:14px;background:var(--sage);border-radius:50%;border:3px solid rgba(255,255,255,0.3)}
+  .timeline-points{display:flex;justify-content:space-between;margin-top:0;position:relative;padding:0 10px}
+  .timeline-point{display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer}
+  .timeline-point-dot{width:16px;height:16px;background:#fff;border-radius:50%;border:3px solid var(--warm);margin-bottom:10px;position:relative;top:-10px;transition:all .3s}
+  .timeline-point:hover .timeline-point-dot{transform:scale(1.3);box-shadow:0 0 15px rgba(196,168,130,0.5)}
+  .timeline-point:first-child .timeline-point-dot{background:var(--sage);border-color:var(--sage);animation:breathe 2s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(181,196,177,0.4)}50%{transform:scale(1.4);box-shadow:0 0 20px 5px rgba(181,196,177,0.6)}}
+  .timeline-point-label{font-size:.85rem;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:1px}
+  .timeline-tooltip{position:absolute;bottom:60px;background:rgba(255,255,255,0.95);color:var(--primary);padding:8px 16px;border-radius:10px;font-size:.8rem;font-weight:600;white-space:nowrap;opacity:0;transform:translateY(5px);transition:all .3s;pointer-events:none;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+  .timeline-tooltip::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid rgba(255,255,255,0.95)}
+  .timeline-point.show-tip .timeline-tooltip{opacity:1;transform:translateY(0)}
+  .preorder{padding:140px 5% 120px;background:var(--cream);position:relative;overflow:hidden}
+  .preorder::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/sestav_v8_2022-Aug-02_10-09-15AM-000_CustomizedView37440487420.png') center center/cover no-repeat;opacity:.15}
+  .preorder-box{max-width:700px;margin:0 auto;text-align:center;background:linear-gradient(135deg,rgba(245,240,235,0.9),rgba(232,221,211,0.9));border-radius:28px;padding:60px 40px 40px;position:relative;overflow:hidden;backdrop-filter:blur(10px);z-index:2;transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .5s cubic-bezier(.4,0,.2,1),box-shadow .5s;cursor:pointer}
+  .cards-wrapper{position:relative;max-width:700px;margin:0 auto;height:auto;z-index:2}
+  .card-front,.card-back{transition:all .6s cubic-bezier(.4,0,.2,1)}
+  .card-front{position:relative;z-index:3}
+  .card-back{position:absolute;top:8px;left:0;right:0;z-index:1;opacity:.65;transform:rotate(6deg) translateX(20px) scale(.98);transform-origin:center center}
+  .cards-wrapper.swapped .card-front{opacity:.65;transform:rotate(6deg) translateX(20px) scale(.98);pointer-events:none;position:absolute;top:8px;left:0;right:0;z-index:1}
+  .cards-wrapper.swapped .card-back{position:relative;top:0;left:0;right:0;opacity:1;transform:rotate(0) translateX(0) scale(1);z-index:3;pointer-events:auto}
+  .swap-hint{position:absolute;top:-20px;right:-40px;width:48px;height:48px;background:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;animation:swapPulse 2.5s ease-in-out infinite}
+  .swap-hint svg{width:24px;height:24px;transform:rotate(40deg)}
+  @keyframes swapPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+  .card-hint{text-align:center;margin-top:16px;font-size:.8rem;color:var(--gray);position:relative;z-index:2}
+  .price-row{display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(44,62,45,0.1)}
+  .price-new{font-size:2.4rem;font-weight:900;color:var(--primary);filter:blur(10px);user-select:none}
+  .price-old{font-size:1.2rem;color:var(--gray);text-decoration:line-through;filter:blur(10px);user-select:none}
+  .price-badge{background:var(--accent2);color:#fff;padding:5px 14px;border-radius:50px;font-size:.85rem;font-weight:700}
+  .price-note{font-size:.85rem;color:var(--gray);margin-top:6px;margin-bottom:24px}
+  footer{padding:48px 5%;background:var(--dark);color:rgba(255,255,255,0.35);text-align:center;font-size:.85rem}
+  footer .footer-logo{font-family:'Montserrat',sans-serif;font-size:1.69rem;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:3px}
+  footer .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+  footer .footer-links a{color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;font-size:.85rem}
+  footer .footer-links a:hover{color:var(--sage)}
+  @media(max-width:900px){
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,247,244,0.98);flex-direction:column;align-items:center;justify-content:center;gap:28px;backdrop-filter:blur(20px)}
+    .nav-links.open{display:flex;z-index:999}
+    .nav-links a{font-size:1.2rem}
+    .hamburger{display:flex;z-index:1001}
+    .hero-content{flex-direction:column;text-align:center}
+    .hero p{margin-left:auto;margin-right:auto}
+    .hero-buttons{justify-content:center}
+    .hero-visual{order:-1}
+    .product-img{width:100%;max-width:480px;margin-left:0}
+    .specs-grid{grid-template-columns:repeat(2,1fr)}
+    .features-grid{grid-template-columns:1fr}
+    .about-content{flex-direction:column;text-align:center}
+    .app-content{flex-direction:column;text-align:center}
+    .app-features{align-items:center}
   }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Montserrat', 'Inter', sans-serif;
-    color: var(--primary);
-    background: var(--cream);
-    overflow-x: hidden;
+  @media(max-width:500px){
+    .specs-grid{grid-template-columns:1fr}
+    .hero{padding:100px 5% 60px}
+    .preorder-box{padding:40px 24px 30px}
   }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 5%; background: rgba(250,247,244,0.92);
-    backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.04);
-    transition: all 0.3s;
-  }
-  nav.scrolled { padding: 12px 5%; box-shadow: 0 4px 30px rgba(44,62,45,0.06); }
-  .logo { font-family: 'Montserrat', sans-serif; font-size: 1.95rem; font-weight: 700; letter-spacing: 3px; color: var(--primary); text-decoration: none; position: relative; }
-  .logo-sup { font-size: 0.35em; font-weight: 600; letter-spacing: 1px; vertical-align: super; margin-left: 2px; opacity: 0.6; }
-  .nav-links { display: flex; gap: 32px; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--primary); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent2); }
-  .nav-cta {
-    background: var(--primary); color: var(--cream) !important; padding: 10px 24px;
-    border-radius: 50px; font-weight: 600 !important; transition: all 0.3s !important;
-  }
-  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
-  .hamburger span { width: 24px; height: 2px; background: var(--primary); transition: all 0.3s; border-radius: 2px; }
-  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-  .hero {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(165deg, var(--primary) 0%, #3d5a3f 35%, #5b8a5f 65%, var(--sage) 100%);
-    position: relative; overflow: hidden; padding: 120px 5% 80px;
-  }
-  .hero::before {
-    content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(196,168,130,0.15) 0%, transparent 70%);
-    border-radius: 50%; animation: pulse 8s ease-in-out infinite;
-  }
-  .hero::after {
-    content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(181,196,177,0.12) 0%, transparent 70%);
-    border-radius: 50%; animation: pulse 10s ease-in-out infinite reverse;
-  }
-  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } }
-
-  .hero-content { position: relative; z-index: 2; max-width: 1200px; width: 100%; display: flex; align-items: center; gap: 60px; }
-  .hero-text { flex: 1; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 8px 20px;
-    font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-bottom: 24px; backdrop-filter: blur(10px);
-  }
-  .hero-badge .dot { width: 8px; height: 8px; background: var(--sage); border-radius: 50%; animation: blink 2s infinite; }
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; color: white; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
-  .hero h1 span { background: linear-gradient(135deg, var(--sand), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { font-size: 1.15rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 500px; margin-bottom: 36px; }
-  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--warm); color: var(--dark); padding: 16px 36px; border-radius: 50px;
-    font-weight: 700; font-size: 1rem; text-decoration: none; border: none; cursor: pointer;
-    transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-primary:hover { background: var(--warm2); color: white; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,168,130,0.3); }
-  .btn-secondary {
-    background: rgba(255,255,255,0.08); color: white; padding: 16px 36px; border-radius: 50px;
-    font-weight: 600; font-size: 1rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
-    transition: all 0.3s; backdrop-filter: blur(10px); cursor: pointer;
-  }
-  .btn-secondary:hover { background: rgba(255,255,255,0.15); }
-
-  .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
-  .hero-product { width: 100%; max-width: 480px; position: relative; }
-  .product-glow {
-    width: 420px; height: 420px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(196,168,130,0.2) 0%, transparent 70%);
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    animation: glowPulse 4s ease-in-out infinite;
-  }
-  @keyframes glowPulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.1); } }
-
-  .product-img {
-    position: relative; z-index: 2; width: 200%; max-width: 960px;
-    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
-    transform-origin: center center;
-    margin-left: -50%;
-    transition: transform 0.6s ease-out;
-  }
-
-  .specs {
-    padding: 100px 5%;
-    background: var(--cream);
-  }
-  .specs .section-header, .specs .specs-grid { position: relative; z-index: 2; }
-  .section-header { text-align: center; margin-bottom: 40px; }
-  .section-label {
-    display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--accent2);
-    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px;
-  }
-  .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1px; color: var(--primary); }
-  .section-header p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 16px auto 0; line-height: 1.7; }
-
-  .specs-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    max-width: 1100px; margin: 0 auto;
-  }
-  .spec-card {
-    background: white; border-radius: 20px; padding: 36px 28px; text-align: center;
-    border: 1px solid rgba(44,62,45,0.06); transition: all 0.4s;
-    position: relative; overflow: hidden;
-  }
-  .spec-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--warm)); transform: scaleX(0);
-    transition: transform 0.4s;
-  }
-  .spec-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(44,62,45,0.07); }
-  .spec-card:hover::before { transform: scaleX(1); }
-  .spec-icon {
-    width: 64px; height: 64px; background: var(--light); border-radius: 16px;
-    display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
-    font-size: 1.6rem;
-  }
-  .spec-value { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
-  .spec-label { font-size: 0.85rem; color: var(--gray); font-weight: 500; }
-
-  .features {
-    padding: 60px 5%; position: relative; overflow: hidden;
-    background: var(--light);
-  }
-  .features::before {
-    content: ''; position: absolute; top: 0; left: 15%; right: -15%; bottom: 0;
-    background: url('https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/render1_2.jpg') right center / cover no-repeat;
-    opacity: 0.8;
-  }
-  .features::after {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to right, var(--light) 0%, var(--light) 30%, rgba(245,240,235,0.4) 65%, rgba(245,240,235,0) 100%);
-  }
-  .features .section-header, .features .features-grid { position: relative; z-index: 2; }
-
-  .features-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    max-width: 1100px; margin: 0 auto;
-  }
-  .feature-card {
-    padding: 24px 20px; border-radius: 16px; background: rgba(255,255,255,0.85);
-    transition: all 0.4s; position: relative; overflow: hidden;
-    border: 1px solid rgba(44,62,45,0.04); backdrop-filter: blur(10px);
-  }
-  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(44,62,45,0.08); }
-  .feature-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: linear-gradient(135deg, var(--sage), var(--accent));
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px; font-size: 1.1rem; color: white;
-  }
-  .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-  .feature-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
-
-  .app-section {
-    padding: 100px 5%; background: var(--cream); overflow: hidden;
-  }
-  .app-content {
-    max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 60px;
-  }
-  .app-img-wrap { flex: 1; display: flex; justify-content: center; }
-  .app-img {
-    width: 100%; max-width: 476px;
-    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.15));
-    animation: appFloat 5s ease-in-out infinite;
-    cursor: pointer; transition: filter 0.5s ease;
-  }
-  .app-img:hover {
-    filter: drop-shadow(0 0 20px rgba(100,200,255,0.8)) drop-shadow(0 0 40px rgba(100,200,255,0.5)) drop-shadow(0 0 60px rgba(100,200,255,0.3));
-  }
-  @keyframes appFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  .app-text { flex: 1; }
-  .app-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; color: var(--primary); }
-  .app-text p { color: var(--gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px; }
-  .app-features { display: flex; flex-direction: column; gap: 14px; margin: 24px 0 32px; }
-  .app-feature-item {
-    display: flex; align-items: center; gap: 12px; font-size: 0.95rem;
-    color: var(--primary); font-weight: 500;
-  }
-  .app-feature-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--sage), var(--accent));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; color: white; flex-shrink: 0;
-  }
-  .app-store-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--primary); color: white; padding: 14px 28px;
-    border-radius: 14px; text-decoration: none; transition: all 0.3s;
-  }
-  .app-store-badge:hover { background: var(--accent2); transform: translateY(-2px); }
-  .app-store-badge svg { width: 24px; height: 24px; fill: white; }
-  .app-store-text { display: flex; flex-direction: column; line-height: 1.2; }
-  .app-store-text small { font-size: 0.65rem; opacity: 0.7; }
-  .app-store-text span { font-size: 1rem; font-weight: 700; }
-
-  .about {
-    padding: 100px 5%;
-    background: linear-gradient(165deg, var(--primary) 0%, #3d5a3f 100%);
-    color: white;
-  }
-  .about-content { max-width: 1100px; margin: 0 auto; display: flex; gap: 60px; align-items: center; }
-  .about-text { flex: 1; }
-  .about-text .section-label { color: var(--sage); }
-  .about-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; }
-  .about-text p { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px; }
-  .about-visual { flex: 1; display: flex; justify-content: center; }
-  .about-card {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px; padding: 48px 40px; backdrop-filter: blur(20px); width: 100%; max-width: 420px;
-  }
-  .about-stat { margin-bottom: 28px; }
-  .about-stat:last-child { margin-bottom: 0; }
-  .about-stat-value { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--sand), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .about-stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
-
-  .about-timeline {
-    max-width: 1100px; margin: 60px auto 0; position: relative; padding: 0 20px;
-  }
-  .timeline-line {
-    position: relative; height: 4px; background: rgba(255,255,255,0.15);
-    border-radius: 2px; margin: 0 10px;
-  }
-  .timeline-fill {
-    position: absolute; top: 0; left: 0; height: 100%; width: 100%;
-    background: linear-gradient(to right, var(--sage), var(--warm));
-    border-radius: 2px;
-  }
-  .timeline-arrow {
-    position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
-    width: 0; height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 14px solid var(--warm);
-  }
-  .timeline-dot-start {
-    position: absolute; left: -6px; top: 50%; transform: translateY(-50%);
-    width: 14px; height: 14px; background: var(--sage);
-    border-radius: 50%; border: 3px solid rgba(255,255,255,0.3);
-  }
-  .timeline-points {
-    display: flex; justify-content: space-between; margin-top: 0;
-    position: relative; padding: 0 10px;
-  }
-  .timeline-point {
-    display: flex; flex-direction: column; align-items: center; position: relative;
-  }
-  .timeline-point-dot {
-    width: 16px; height: 16px; background: white; border-radius: 50%;
-    border: 3px solid var(--warm); margin-bottom: 10px; position: relative; top: -10px;
-  }
-  .timeline-point:first-child .timeline-point-dot { background: var(--sage); border-color: var(--sage); }
-  .timeline-point-label {
-    font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 1px;
-  }
-
-  .preorder { padding: 100px 5%; background: var(--cream); position: relative; overflow: hidden; }
-  .preorder::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: url('https://raw.githubusercontent.com/nori-modelar/scubawing-images/refs/heads/main/sestav_v8_2022-Aug-02_10-09-15AM-000_CustomizedView37440487420.png') center center / cover no-repeat;
-    opacity: 0.15;
-  }
-  .preorder-box {
-    max-width: 700px; margin: 0 auto; text-align: center;
-    background: linear-gradient(135deg, rgba(245,240,235,0.9), rgba(232,221,211,0.9));
-    border-radius: 28px; padding: 60px 40px 40px; position: relative; overflow: hidden;
-    backdrop-filter: blur(10px); z-index: 2;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1), box-shadow 0.5s;
-    cursor: pointer;
-  }
-  .cards-wrapper {
-    position: relative; max-width: 700px; margin: 0 auto;
-    height: auto; z-index: 2;
-  }
-  .card-front, .card-back {
-    transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
-  }
-  .card-front {
-    position: relative; z-index: 3;
-  }
-  .card-back {
-    position: absolute; top: 8px; left: 0; right: 0; z-index: 1;
-    opacity: 0.65; transform: rotate(6deg) translateX(20px) scale(0.98);
-    transform-origin: center center;
-  }
-  .cards-wrapper.swapped .card-front {
-    opacity: 0.65; transform: rotate(6deg) translateX(20px) scale(0.98);
-    pointer-events: none; position: absolute; top: 8px; left: 0; right: 0; z-index: 1;
-  }
-  .cards-wrapper.swapped .card-back {
-    position: relative; top: 0; left: 0; right: 0;
-    opacity: 1; transform: rotate(0deg) translateX(0) scale(1); z-index: 3;
-    pointer-events: auto;
-  }
-  .swap-hint {
-    position: absolute; top: -20px; right: -40px; width: 48px; height: 48px;
-    background: none; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 10; animation: swapPulse 2.5s ease-in-out infinite;
-  }
-  .swap-hint svg { width: 24px; height: 24px; transform: rotate(40deg); }
-  @keyframes swapPulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.15); opacity: 1; }
-  }
-  .card-hint {
-    text-align: center; margin-top: 16px; font-size: 0.8rem; color: var(--gray);
-    position: relative; z-index: 2;
-  }
-  .price-row {
-    display: flex; align-items: center; gap: 12px; justify-content: center;
-    flex-wrap: wrap; margin-top: 24px; padding-top: 24px;
-    border-top: 1px solid rgba(44,62,45,0.1);
-  }
-  .price-new { font-size: 2.4rem; font-weight: 900; color: var(--primary); filter: blur(10px); user-select: none; }
-  .price-old { font-size: 1.2rem; color: var(--gray); text-decoration: line-through; filter: blur(10px); user-select: none; }
-  .price-badge { background: var(--accent2); color: white; padding: 5px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; }
-  .price-note { font-size: 0.85rem; color: var(--gray); margin-top: 6px; margin-bottom: 24px; }
-
-  footer {
-    padding: 48px 5%; background: var(--dark); color: rgba(255,255,255,0.35);
-    text-align: center; font-size: 0.85rem;
-  }
-  footer .footer-logo { font-family: 'Montserrat', sans-serif; font-size: 1.69rem; font-weight: 700; color: white; margin-bottom: 16px; letter-spacing: 3px; }
-  footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
-  footer .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; font-size: 0.85rem; }
-  footer .footer-links a:hover { color: var(--sage); }
-
-  @media (max-width: 900px) {
-    .nav-links {
-      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(250,247,244,0.98); flex-direction: column; align-items: center;
-      justify-content: center; gap: 28px; backdrop-filter: blur(20px);
-    }
-    .nav-links.open { display: flex; z-index: 999; }
-    .nav-links a { font-size: 1.2rem; }
-    .hamburger { display: flex; z-index: 1001; }
-    .hero-content { flex-direction: column; text-align: center; }
-    .hero p { margin-left: auto; margin-right: auto; }
-    .hero-buttons { justify-content: center; }
-    .hero-visual { order: -1; }
-    .product-img { width: 100%; max-width: 480px; margin-left: 0; }
-    .specs-grid { grid-template-columns: repeat(2, 1fr); }
-    .features-grid { grid-template-columns: 1fr; }
-    .about-content { flex-direction: column; text-align: center; }
-    .app-content { flex-direction: column; text-align: center; }
-    .app-features { align-items: center; }
-  }
-
-  @media (max-width: 500px) {
-    .specs-grid { grid-template-columns: 1fr; }
-    .hero { padding: 100px 5% 60px; }
-    .preorder-box { padding: 40px 24px 30px; }
-  }
-
-  .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -409,9 +170,7 @@
     <a href="contact.html" onclick="closeMenu()">Contact</a>
     <a href="#preorder" class="nav-cta" onclick="closeMenu()">Pre-Order</a>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="hero">
@@ -442,23 +201,23 @@
   </div>
   <div class="specs-grid">
     <div class="spec-card fade-up">
-      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">rocket_launch</span></div>
+      <div class="spec-icon">&#9889;</div>
       <div class="spec-value">60+ kg</div>
       <div class="spec-label">of motor thrust</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">electric_bolt</span></div>
+      <div class="spec-icon">&#128267;</div>
       <div class="spec-value">Up to 1h</div>
       <div class="spec-label">of battery life</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">speed</span></div>
+      <div class="spec-icon">&#127754;</div>
       <div class="spec-value">15 km/h</div>
       <div class="spec-label">top speed underwater</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon"><span class="material-symbols-outlined" style="font-size:1.6rem;color:var(--accent2);transform:scaleX(-1);">elevation</span></div>
-      <div class="spec-value">40 m</div>
+      <div class="spec-icon">🎯</div>
+      <div class="spec-value">Up to 40m</div>
       <div class="spec-label">depth rated</div>
     </div>
   </div>
@@ -471,15 +230,16 @@
     <p>Designed by aerospace experts with fun in mind. Every feature serves a purpose beneath the surface.</p>
   </div>
   <div class="features-grid">
+    <div class="feature-card fade-up" style="position:relative;padding-top:44px;">
+      <div style="position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:6px;background:var(--light);border:1px solid rgba(44,62,45,0.08);border-radius:50px;padding:5px 14px;font-size:.75rem;color:var(--accent2);font-weight:600;"><span>&#9873;</span> Patented Technology</div>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">flight</span></div>
+      <h3>Hydrodynamic Design</h3>
+      <p>Wing-inspired body reduces drag and provides effortless gliding through the water at any depth.</p>
+    </div>
     <div class="feature-card fade-up">
       <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">target</span></div>
       <h3>Precision Control</h3>
       <p>Variable speed trigger with intuitive ergonomic grip gives you total command of your underwater movement and rotation. Do flips and rolls with ease!</p>
-    </div>
-    <div class="feature-card fade-up">
-      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">flight</span></div>
-      <h3>Hydrodynamic Design</h3>
-      <p>Wing-inspired body reduces drag and provides effortless gliding through the water at any depth.</p>
     </div>
     <div class="feature-card fade-up">
       <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">battery_charging_full</span></div>
@@ -532,8 +292,8 @@
         </div>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://www.apple.com/app-store/" target="_blank"><img src="https://github.com/nori-modelar/scubawing-images/blob/main/app2png.png?raw=true" alt="Download on the App Store" style="height:50px;width:auto;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'"></a>
-        <img src="https://github.com/nori-modelar/scubawing-images/blob/main/store.png?raw=true" alt="Get it on Google Play" style="height:50px;width:auto;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <a href="https://www.apple.com/app-store/" target="_blank"><img src="https://github.com/nori-modelar/scubawing-images/blob/main/app2png.png?raw=true" alt="Download on the App Store" style="height:50px;width:auto;cursor:pointer;transition:all .3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'"></a>
+        <img src="https://github.com/nori-modelar/scubawing-images/blob/main/store.png?raw=true" alt="Get it on Google Play" style="height:50px;width:auto;cursor:pointer;transition:all .3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
       </div>
     </div>
   </div>
@@ -551,7 +311,7 @@
       <div class="about-card">
         <div class="about-stat">
           <div class="about-stat-value">100%</div>
-          <div class="about-stat-label">Electric & Zero Emissions</div>
+          <div class="about-stat-label">Electric &amp; Zero Emissions</div>
         </div>
         <div class="about-stat">
           <div class="about-stat-value">2026</div>
@@ -559,7 +319,7 @@
         </div>
         <div class="about-stat">
           <div class="about-stat-value">&lt; 12 kg</div>
-          <div class="about-stat-label">Lightweight & Travel-Ready</div>
+          <div class="about-stat-label">Lightweight &amp; Travel-Ready</div>
         </div>
       </div>
     </div>
@@ -571,93 +331,83 @@
       <div class="timeline-arrow"></div>
     </div>
     <div class="timeline-points">
-      <div class="timeline-point">
+      <div class="timeline-point" onclick="toggleTip(this)">
+        <div class="timeline-tooltip">Preorders open</div>
         <div class="timeline-point-dot"></div>
         <div class="timeline-point-label">Apr. 2026</div>
       </div>
-      <div class="timeline-point">
+      <div class="timeline-point" onclick="toggleTip(this)">
+        <div class="timeline-tooltip">Production starts</div>
         <div class="timeline-point-dot"></div>
         <div class="timeline-point-label">Jun. 2026</div>
       </div>
-      <div class="timeline-point">
+      <div class="timeline-point" onclick="toggleTip(this)">
+        <div class="timeline-tooltip">Shipping first units!</div>
         <div class="timeline-point-dot"></div>
         <div class="timeline-point-label">Aug. 2026</div>
       </div>
     </div>
   </div>
-</section> id="preorder">
+</section>
+
+<section class="preorder" id="preorder">
   <div class="cards-wrapper" id="cardsWrapper">
     <div class="swap-hint" onclick="swapCards()">
       <svg viewBox="0 0 24 24" fill="none" stroke="#8a8177" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 1l4 4-4 4"/>
-        <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-        <path d="M7 23l-4-4 4-4"/>
-        <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        <path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
       </svg>
     </div>
     <div class="preorder-box card-front fade-up" onclick="swapCards()">
-      <div style="position:absolute;top:20px;right:20px;background:var(--accent2);color:white;padding:6px 16px;border-radius:50px;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">PRO</div>
+      <div style="position:absolute;top:20px;right:20px;background:var(--accent2);color:#fff;padding:6px 16px;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">PRO</div>
       <div class="section-label">Limited Early Bird</div>
       <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:16px;color:var(--primary);">Reserve Your Mokarran PRO</h2>
       <p style="color:var(--gray);font-size:1.05rem;line-height:1.7;max-width:500px;margin:0 auto;">We're currently accepting pre-orders via email. Be among the first to own the future of underwater propulsion.</p>
       <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(44,62,45,0.1);text-align:left;">
         <div style="flex:1;min-width:200px;">
-          <div style="font-size:0.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Early Bird Bundle</div>
+          <div style="font-size:.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Early Bird Bundle</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Mokarran PRO
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Fast Charger
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Free MKRN App Connectivity
-            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Mokarran PRO</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Fast Charger</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Free MKRN App Connectivity</div>
           </div>
         </div>
         <div style="flex:1;min-width:200px;text-align:center;">
           <div class="price-row" style="margin-top:0;padding-top:0;border-top:none;">
-            <span class="price-new">€1,950</span>
-            <span class="price-old">€3,900</span>
+            <span class="price-new">&euro;1,950</span>
+            <span class="price-old">&euro;3,900</span>
             <span class="price-badge">-50%</span>
           </div>
           <p class="price-note">Early bird pre-order price</p>
           <a href="mailto:timotej.hofbauer@gmail.com?subject=Mokarran%20PRO%20Pre-Order" class="btn-primary" style="font-size:1.1rem;padding:18px 40px;" onclick="event.stopPropagation();">Pre-order now! &#8594;</a>
         </div>
       </div>
-      <p style="font-size:0.8rem;color:var(--gray);margin-top:16px;">Send us an email with subject "Mokarran PRO Pre-Order" to reserve yours.</p>
+      <p style="font-size:.8rem;color:var(--gray);margin-top:16px;">Send us an email with subject "Mokarran PRO Pre-Order" to reserve yours.</p>
     </div>
     <div class="preorder-box card-back" onclick="swapCards()">
-      <div style="position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#c0c0c0,#8a8a8a,#b8b8b8);color:white;padding:6px 16px;border-radius:50px;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,0.15);">ULTRA</div>
+      <div style="position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#c0c0c0,#8a8a8a,#b8b8b8);color:#fff;padding:6px 16px;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,0.15);">ULTRA</div>
       <div class="section-label">Limited Early Bird</div>
       <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:16px;color:var(--primary);">Reserve Your Mokarran ULTRA</h2>
       <p style="color:var(--gray);font-size:1.05rem;line-height:1.7;max-width:500px;margin:0 auto;">We're currently accepting pre-orders via email. Be among the first to own the future of underwater propulsion.</p>
       <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(44,62,45,0.1);text-align:left;">
         <div style="flex:1;min-width:200px;">
-          <div style="font-size:0.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Early Bird Bundle</div>
+          <div style="font-size:.75rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Early Bird Bundle</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Mokarran ULTRA - Carbon
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Ultra Fast Charger
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--primary);font-weight:500;">
-              <span style="color:var(--accent2);">&#10003;</span> 1x Free MKRN App Connectivity
-            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Mokarran ULTRA - Carbon</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Ultra Fast Charger</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--primary);font-weight:500;"><span style="color:var(--accent2);">&#10003;</span> 1x Free MKRN App Connectivity</div>
           </div>
         </div>
         <div style="flex:1;min-width:200px;text-align:center;">
           <div class="price-row" style="margin-top:0;padding-top:0;border-top:none;">
-            <span class="price-new">€1,950</span>
-            <span class="price-old">€3,900</span>
+            <span class="price-new">&euro;1,950</span>
+            <span class="price-old">&euro;3,900</span>
             <span class="price-badge">-50%</span>
           </div>
           <p class="price-note">Early bird pre-order price</p>
           <a href="mailto:timotej.hofbauer@gmail.com?subject=Mokarran%20ULTRA%20Pre-Order" class="btn-primary" style="font-size:1.1rem;padding:18px 40px;" onclick="event.stopPropagation();">Pre-order now! &#8594;</a>
         </div>
       </div>
-      <p style="font-size:0.8rem;color:var(--gray);margin-top:16px;">Send us an email with subject "Mokarran ULTRA Pre-Order" to reserve yours.</p>
+      <p style="font-size:.8rem;color:var(--gray);margin-top:16px;">Send us an email with subject "Mokarran ULTRA Pre-Order" to reserve yours.</p>
     </div>
   </div>
   <p class="card-hint">&#8593; Click card to switch between models</p>
@@ -676,38 +426,22 @@
 </footer>
 
 <script>
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    const img = document.querySelector('.product-img');
-    if (img) {
-      const hero = document.querySelector('.hero');
-      const heroBottom = hero.offsetHeight;
-      if (window.scrollY > heroBottom) {
-        img.style.transform = 'rotate(0deg)';
-      } else {
-        const rot = -(window.scrollY * 0.015);
-        img.style.transform = 'rotate(' + rot + 'deg)';
-      }
+  window.addEventListener('scroll',()=>{
+    document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+    const img=document.querySelector('.product-img');
+    if(img){
+      const hero=document.querySelector('.hero');
+      const hb=hero.offsetHeight;
+      if(window.scrollY>hb){img.style.transform='rotate(0deg)'}
+      else{img.style.transform='rotate('+-(window.scrollY*.015)+'deg)'}
     }
   });
-
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-    document.getElementById('hamburger').classList.toggle('open');
-  }
-  function closeMenu() {
-    document.getElementById('navLinks').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  }
-
-  function swapCards() {
-    document.getElementById('cardsWrapper').classList.toggle('swapped');
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open')}
+  function closeMenu(){document.getElementById('navLinks').classList.remove('open');document.getElementById('hamburger').classList.remove('open')}
+  function swapCards(){document.getElementById('cardsWrapper').classList.toggle('swapped')}
+  function toggleTip(el){document.querySelectorAll('.timeline-point').forEach(p=>{if(p!==el)p.classList.remove('show-tip')});el.classList.toggle('show-tip')}
+  const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.15});
+  document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 </script>
 
 </body>
