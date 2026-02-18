@@ -6,6 +6,8 @@
 <title>ScubaWing - Mokarran PRO</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;700&display=swap');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -253,6 +255,46 @@
   .about-stat-value { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--sand), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .about-stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
 
+  .about-timeline {
+    max-width: 1100px; margin: 60px auto 0; position: relative; padding: 0 20px;
+  }
+  .timeline-line {
+    position: relative; height: 4px; background: rgba(255,255,255,0.15);
+    border-radius: 2px; margin: 0 10px;
+  }
+  .timeline-fill {
+    position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+    background: linear-gradient(to right, var(--sage), var(--warm));
+    border-radius: 2px;
+  }
+  .timeline-arrow {
+    position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid var(--warm);
+  }
+  .timeline-dot-start {
+    position: absolute; left: -6px; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; background: var(--sage);
+    border-radius: 50%; border: 3px solid rgba(255,255,255,0.3);
+  }
+  .timeline-points {
+    display: flex; justify-content: space-between; margin-top: 0;
+    position: relative; padding: 0 10px;
+  }
+  .timeline-point {
+    display: flex; flex-direction: column; align-items: center; position: relative;
+  }
+  .timeline-point-dot {
+    width: 16px; height: 16px; background: white; border-radius: 50%;
+    border: 3px solid var(--warm); margin-bottom: 10px; position: relative; top: -10px;
+  }
+  .timeline-point:first-child .timeline-point-dot { background: var(--sage); border-color: var(--sage); }
+  .timeline-point-label {
+    font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 1px;
+  }
+
   .preorder { padding: 100px 5%; background: var(--cream); position: relative; overflow: hidden; }
   .preorder::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -363,7 +405,6 @@
   <div class="nav-links" id="navLinks">
     <a href="#specs" onclick="closeMenu()">Specs</a>
     <a href="#features" onclick="closeMenu()">Features</a>
-    <a href="#app" onclick="closeMenu()">App</a>
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="contact.html" onclick="closeMenu()">Contact</a>
     <a href="#preorder" class="nav-cta" onclick="closeMenu()">Pre-Order</a>
@@ -397,26 +438,26 @@
   <div class="section-header fade-up">
     <div class="section-label">Performance</div>
     <h2>Built to Perform</h2>
-    <p>Every detail of the Mokarran PRO is engineered for maximum underwater performance and reliability.</p>
+    <p>Every detail of the Mokarran is engineered for maximum underwater performance and fun. Come and fly with us underwater!</p>
   </div>
   <div class="specs-grid">
     <div class="spec-card fade-up">
-      <div class="spec-icon">&#9889;</div>
-      <div class="spec-value">35 lbs</div>
+      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">rocket_launch</span></div>
+      <div class="spec-value">60+ kg</div>
       <div class="spec-label">of motor thrust</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon">&#128267;</div>
-      <div class="spec-value">3 hrs</div>
-      <div class="spec-label">battery life</div>
+      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">electric_bolt</span></div>
+      <div class="spec-value">Up to 1h</div>
+      <div class="spec-label">of battery life</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon">&#127754;</div>
-      <div class="spec-value">8 mph</div>
+      <div class="spec-icon"><span class="material-icons" style="font-size:1.6rem;color:var(--accent2);">speed</span></div>
+      <div class="spec-value">15 km/h</div>
       <div class="spec-label">top speed underwater</div>
     </div>
     <div class="spec-card fade-up">
-      <div class="spec-icon">&#128907;</div>
+      <div class="spec-icon"><span class="material-symbols-outlined" style="font-size:1.6rem;color:var(--accent2);transform:scaleX(-1);">elevation</span></div>
       <div class="spec-value">40 m</div>
       <div class="spec-label">depth rated</div>
     </div>
@@ -427,38 +468,38 @@
   <div class="section-header fade-up">
     <div class="section-label">Features</div>
     <h2>Why Mokarran PRO</h2>
-    <p>Designed by divers, for divers. Every feature serves a purpose beneath the surface.</p>
+    <p>Designed by aerospace experts with fun in mind. Every feature serves a purpose beneath the surface.</p>
   </div>
   <div class="features-grid">
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#9878;</div>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">target</span></div>
       <h3>Precision Control</h3>
-      <p>Variable speed trigger with intuitive ergonomic grip gives you total command of your underwater movement.</p>
+      <p>Variable speed trigger with intuitive ergonomic grip gives you total command of your underwater movement and rotation. Do flips and rolls with ease!</p>
     </div>
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#128171;</div>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">flight</span></div>
       <h3>Hydrodynamic Design</h3>
       <p>Wing-inspired body reduces drag and provides effortless gliding through the water at any depth.</p>
     </div>
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#128274;</div>
-      <h3>Quick-Swap Battery</h3>
-      <p>Modular battery system allows fast swaps between dives with no tools required.</p>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">battery_charging_full</span></div>
+      <h3>Battery System</h3>
+      <p>State of the art battery system that will allow you to enjoy longer than expected and recharge even faster with our fast charging solutions.</p>
     </div>
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#127919;</div>
-      <h3>Ultra Quiet Motor</h3>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">cyclone</span></div>
+      <h3>Safe and Quiet Propulsion</h3>
       <p>Brushless motor runs whisper-quiet so you can approach marine life without disturbance.</p>
     </div>
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#128161;</div>
-      <h3>LED Depth Display</h3>
-      <p>Integrated display shows speed, battery level, and depth at a glance on every dive.</p>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">lightbulb</span></div>
+      <h3>Intuitive Features</h3>
+      <p>Every Mokarran comes equipped with LED display to check State of Charge, Speed mode, Depth mode and more.</p>
     </div>
     <div class="feature-card fade-up">
-      <div class="feature-icon">&#128736;</div>
+      <div class="feature-icon"><span class="material-symbols-outlined" style="font-size:1.2rem;">military_tech</span></div>
       <h3>Marine-Grade Build</h3>
-      <p>Anodized aluminum and reinforced polymer construction withstands the toughest conditions.</p>
+      <p>Longetivity is our priority! Carbon fiber construction and anodized aluminum withstands the toughest conditions.</p>
     </div>
   </div>
 </section>
@@ -474,24 +515,20 @@
       <p>Take full control of your Mokarran with the MKRN companion app. Connect via Bluetooth, fine-tune your ride, and track every dive — all from your phone.</p>
       <div class="app-features">
         <div class="app-feature-item">
-          <div class="app-feature-icon">&#9881;</div>
+          <div class="app-feature-icon"><span class="material-symbols-outlined" style="font-size:1rem;">settings</span></div>
           <span>Adjust motor parameters and speed profiles</span>
         </div>
         <div class="app-feature-item">
-          <div class="app-feature-icon">&#128267;</div>
+          <div class="app-feature-icon"><span class="material-symbols-outlined" style="font-size:1rem;">battery_status_good</span></div>
           <span>Monitor battery health and charge cycles</span>
         </div>
         <div class="app-feature-item">
-          <div class="app-feature-icon">&#128202;</div>
+          <div class="app-feature-icon"><span class="material-symbols-outlined" style="font-size:1rem;">bar_chart_4_bars</span></div>
           <span>View dive logs, distance, and depth history</span>
         </div>
         <div class="app-feature-item">
-          <div class="app-feature-icon">&#128225;</div>
+          <div class="app-feature-icon"><span class="material-symbols-outlined" style="font-size:1rem;">settings_input_antenna</span></div>
           <span>Firmware updates over-the-air</span>
-        </div>
-        <div class="app-feature-item">
-          <div class="app-feature-icon">&#128274;</div>
-          <span>Secure Bluetooth connectivity</span>
         </div>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
@@ -507,8 +544,8 @@
     <div class="about-text fade-up">
       <div class="section-label">About ScubaWing</div>
       <h2>Redefining Underwater Exploration</h2>
-      <p>Named after the great hammerhead shark (Sphyrna mokarran), the Mokarran PRO embodies the power and grace of one of the ocean's most impressive predators.</p>
-      <p>At ScubaWing, we're building the future of personal underwater propulsion — combining cutting-edge engineering with a deep respect for the marine environment.</p>
+      <p>Named after the great hammerhead shark (Sphyrna mokarran), the Mokarran embodies the power and grace of one of the ocean's most impressive predators.</p>
+      <p>At ScubaWing, we're building the fun future of underwater propulsion — combining cutting-edge engineering with a deep respect for the marine environment.</p>
     </div>
     <div class="about-visual fade-up">
       <div class="about-card">
@@ -527,9 +564,28 @@
       </div>
     </div>
   </div>
-</section>
-
-<section class="preorder" id="preorder">
+  <div class="about-timeline fade-up">
+    <div class="timeline-line">
+      <div class="timeline-fill"></div>
+      <div class="timeline-dot-start"></div>
+      <div class="timeline-arrow"></div>
+    </div>
+    <div class="timeline-points">
+      <div class="timeline-point">
+        <div class="timeline-point-dot"></div>
+        <div class="timeline-point-label">Apr. 2026</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-point-dot"></div>
+        <div class="timeline-point-label">Jun. 2026</div>
+      </div>
+      <div class="timeline-point">
+        <div class="timeline-point-dot"></div>
+        <div class="timeline-point-label">Aug. 2026</div>
+      </div>
+    </div>
+  </div>
+</section> id="preorder">
   <div class="cards-wrapper" id="cardsWrapper">
     <div class="swap-hint" onclick="swapCards()">
       <svg viewBox="0 0 24 24" fill="none" stroke="#8a8177" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -612,8 +668,8 @@
   <div class="footer-links">
     <a href="#specs">Specs</a>
     <a href="#features">Features</a>
-    <a href="#app">App</a>
     <a href="#about">About</a>
+    <a href="contact.html">Contact</a>
     <a href="#preorder">Pre-Order</a>
   </div>
   <p>&copy; 2026 ScubaWing. All rights reserved. www.scubawing.com</p>
