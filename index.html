@@ -168,10 +168,10 @@
   @media(max-width:900px){
     .nav-links{display:none}
     .hamburger{display:flex}
-    .hero-content{flex-direction:column;text-align:center}
+    .hero-content{flex-direction:column;text-align:center;gap:16px}
     .hero p{margin-left:auto;margin-right:auto}
     .hero-buttons{justify-content:center}
-    .hero-visual{order:-1}
+    .hero-visual{order:-1;margin-bottom:-20px}
     .product-img{width:100%;max-width:480px;margin-left:0}
     .specs-grid{grid-template-columns:repeat(2,1fr)}
     .features-grid{grid-template-columns:1fr}
@@ -204,6 +204,7 @@
 
 <!-- SEPARATE MOBILE MENU OVERLAY -->
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="closeMenu()" style="font-family:'Montserrat',sans-serif;font-size:1.95rem;font-weight:700;letter-spacing:3px;margin-bottom:8px;">SCUBAWING<sup style="font-size:.35em;font-weight:600;letter-spacing:1px;vertical-align:super;margin-left:2px;opacity:.6;">MKRN</sup></a>
   <a href="#specs" onclick="closeMenu()">Specs</a>
   <a href="#features" onclick="closeMenu()">Features</a>
   <a href="#about" onclick="closeMenu()">About</a>
@@ -427,6 +428,8 @@
 </footer>
 
 <script>
+  const isMobile=window.innerWidth<=900;
+  const rotMult=isMobile?0.0165:0.015;
   window.addEventListener('scroll',()=>{
     document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
     const img=document.querySelector('.product-img');
@@ -434,7 +437,7 @@
       const hero=document.querySelector('.hero');
       const hb=hero.offsetHeight;
       if(window.scrollY>hb){img.style.transform='rotate(0deg)'}
-      else{img.style.transform='rotate('+-(window.scrollY*.015)+'deg)'}
+      else{img.style.transform='rotate('+-(window.scrollY*rotMult)+'deg)'}
     }
   });
   function toggleMenu(){
@@ -445,6 +448,11 @@
     document.getElementById('mobileMenu').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
   }
+  let lastScrollY=window.scrollY;
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>lastScrollY){closeMenu()}
+    lastScrollY=window.scrollY;
+  });
   function swapCards(){document.getElementById('cardsWrapper').classList.toggle('swapped')}
   function toggleTip(el){document.querySelectorAll('.timeline-point').forEach(p=>{if(p!==el)p.classList.remove('show-tip')});el.classList.toggle('show-tip')}
   const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.15});
